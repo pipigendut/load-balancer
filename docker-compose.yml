@@ -1,18 +1,14 @@
 version: '3'
-services:
 
-  #Nginx Service
+services:
   webserver:
-    image: nginx:alpine
-    container_name: load-balancer
-    restart: unless-stopped
-    tty: true
+    image: nginx:latest
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
+    restart: always
     volumes:
-      - ./:/var/www
-      - ./dockerconfig/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     networks:
@@ -24,18 +20,18 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
 
-  #MQTT
   mosquitto:
     hostname: mosquitto
     image: eclipse-mosquitto:latest
     container_name: mosquitto
     restart: always
     volumes:
-      - ./dockerconfig/mosquitto/config/:/mosquitto/config/
+      - ./mosquitto/config/:/mosquitto/config/
       - ./certbot/conf/:/mosquitto/certs/
     ports:
       - 1884:1883
       - 8883:8883
+      - 8083:8083
       - 9002:9001
     networks:
       - app-network
@@ -44,8 +40,3 @@ services:
 networks:
   app-network:
     driver: bridge
-
-#Volumes
-volumes:
-  dbdata:
-    driver: local

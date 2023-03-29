@@ -1,13 +1,18 @@
-### Running
-
-Setup cerbot
-1. commented nginx conf for ssl
-2. RUN
+### Generate Certs
 ```bash
-docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d pipigendut.tech
-docker compose run --rm certbot certonly --standalone --preferred-challenges http -d pipigendut.tech
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d pipigendut.tech
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d pipigendut.tech
 ```
-3. uncommented nginx conf for ssl
-4. RUN
+
+### Renewing Certs
+```bash
+docker-compose run --rm certbot renew
+```
+
+### Running
 ```bash
 docker-compose up -d
+```
+
+### Reference
+https://mindsers.blog/post/https-using-nginx-certbot-docker/
