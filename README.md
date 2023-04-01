@@ -1,6 +1,6 @@
 ### Generate Certs
 ```bash
-docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d pipigendut.tech
+docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d iot.pipigendut.tech
 docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d pipigendut.tech
 ```
 
