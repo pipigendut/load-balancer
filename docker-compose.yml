@@ -22,21 +22,21 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
 
-  # mosquitto:
-  #   hostname: mosquitto
-  #   image: eclipse-mosquitto:latest
-  #   container_name: mosquitto
-  #   restart: always
-  #   volumes:
-  #     - ./mosquitto/config/:/mosquitto/config/
-  #     - ./certbot/conf/:/mosquitto/certs/
-  #   ports:
-  #     - 1884:1883
-  #     - 8883:8883
-  #     - 8083:8083
-  #     - 9002:9001
-  #   networks:
-  #     - app-network
+  mosquitto:
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: always
+    volumes:
+      - ./mosquitto/config/:/mosquitto/config/
+      - ./certbot/conf/:/mosquitto/certs/
+    ports:
+      - 1884:1883
+      - 8883:8883
+      - 8083:8083
+      - 9002:9001
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
