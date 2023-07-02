@@ -13,7 +13,7 @@ services:
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     networks:
-      - app-network
+      - host
 
   certbot:
     image: certbot/certbot:latest
@@ -36,9 +36,10 @@ services:
       - 8083:8083
       - 9002:9001
     networks:
-      - app-network
+      - host
 
 #Docker Networks
 networks:
-  app-network:
-    driver: bridge
+  host:
+    name: host
+    external: true
